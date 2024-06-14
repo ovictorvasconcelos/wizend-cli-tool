@@ -6,8 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["Node", "Javascript", "CLI", "CLI-Tool", "Tool", "Command Line"],
+  "keywords": [
+    "Node",
+    "Javascript",
+    "CLI",
+    "CLI-Tool",
+    "Tool",
+    "Command Line"
+  ],
   "author": "Victor Vasconcelos",
   "license": "MIT",
-  "description": "Command line tool (CLI) for creating projects in Node.Js, React Js and Next.Js"
+  "description": "Command line tool (CLI) for creating projects in Node.Js, React Js and Next.Js",
+  "dependencies": {
+    "arg": "^5.0.2"
+  }
 }
