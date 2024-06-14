@@ -2,6 +2,7 @@
   "name": "cli-tool-wizend",
   "version": "1.0.0",
   "main": "index.js",
+  "bin": "./bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
