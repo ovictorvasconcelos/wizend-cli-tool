@@ -17,7 +17,7 @@ try {
     usageTool();
 }
 
-const usageTool = () => {
+function usageTool() {
     console.log(`Wizend [CMD]
     --create\tStarts the app
     --config\tSee app config`);
