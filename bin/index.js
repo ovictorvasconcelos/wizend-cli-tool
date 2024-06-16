@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import arg from "arg";
+import getUserConfig from "../src/config/config-mgr.js";
 
 try {
     const args = arg({
@@ -7,8 +8,10 @@ try {
         '--config': Boolean,
     });
 
-    if (args['--config'])
-        console.log('Configure the app');
+    if (args['--config']) {
+        const userConfig = getUserConfig();
+        console.log(userConfig);
+    }
 
 } catch (error) {
     console.log(error.message);
