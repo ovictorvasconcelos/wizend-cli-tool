@@ -3,7 +3,6 @@ import path from "path";
 import inquirer from "inquirer";
 import { promisify } from "util";
 import logger from "../logger.js";
-import getUserConfig from "../config/config-mgr.js";
 import { createNextProject } from "../templates/nextProject.js";
 import { createNodeProject } from "../templates/nodeProject.js";
 import { createReactProject } from "../templates/reactProject.js";
@@ -48,8 +47,7 @@ export async function createCommand() {
                 default: "Unknow Auhtor"
             },
         ]);
-
-        const userConfig = getUserConfig();
+        
         const projectDirectory = path.join(process.cwd(), projectInfo.projectName);
 
         await makeDirAsync(projectDirectory);
