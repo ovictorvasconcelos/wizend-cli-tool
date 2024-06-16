@@ -13,7 +13,7 @@ export default function getUserConfig() {
 
     if (!resultConfig) {
         logMessage.error('Could not find configuration, using default');
-        return { port: 8080 };
+        return { port: 8080, projectType: "node", useTypescript: true, repository: "", author: "Unknown" };
     } else {
         const validate = ajv.compile(schema);
         const isValidConfig = validate(resultConfig.config);
