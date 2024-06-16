@@ -2,8 +2,8 @@
 import arg from "arg";
 import logger from "../src/logger.js";
 import startCommand from "../src/commands/start.js";
-import createCommand from "../src/commands/create.js";
 import getUserConfig from "../src/config/config-mgr.js";
+import { createCommand } from "../src/commands/create.js";
 
 const logMessage = logger('config:mgr');
 
