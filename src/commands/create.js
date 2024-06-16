@@ -22,6 +22,12 @@ export async function createCommand() {
                 validate: (input) => !!input.trim() || "Project name cannot be empty",
             },
             {
+                type: 'input',
+                name: 'projectDescription',
+                message: 'Project Description',
+                default: "Create with Wizend CLI Tool"
+            },
+            {
                 type: 'list',
                 name: 'projectType',
                 message: 'Select the type of project',
@@ -33,7 +39,13 @@ export async function createCommand() {
                 name: 'useTypeScript',
                 message: 'Use Typescript?',
                 default: false
-            }
+            },
+            {
+                type: 'input',
+                name: 'projectAuthor',
+                message: 'Author',
+                default: "Unknow Auhtor"
+            },
         ]);
 
         const userConfig = getUserConfig();
@@ -41,7 +53,7 @@ export async function createCommand() {
 
         await makeDirAsync(projectDirectory);
 
-        const readmeContent = `# ${projectInfo.projectName}\n\n${userConfig.description || ''}\n\nDeveloped by ${userConfig.author}\n\nProject Type: ${projectInfo.projectType}\nUse TypeScript: ${projectInfo.useTypeScript}`;
+        const readmeContent = `# ${projectInfo.projectName}\n\n${projectInfo.projectDescription || ''}\n\nDeveloped by ${projectInfo.projectAuthor}\n\nProject Type: ${projectInfo.projectType}\nUse TypeScript: ${projectInfo.useTypeScript}`;
 
         await writeAsyncFile(
             path.join(projectDirectory, 'README.md'), readmeContent
@@ -51,13 +63,13 @@ export async function createCommand() {
 
         switch (projectInfo.projectType) {
             case 'Node':
-                await createNodeProject(projectDirectory, projectInfo.useTypeScript);
+                await createNodeProject(projectDirectory, projectInfo.useTypeScript, projectInfo.projectAuthor, projectInfo.projectDescription);
                 break;
             case 'React':
-                await createReactProject(projectDirectory, projectInfo.useTypeScript);
+                await createReactProject(projectDirectory, projectInfo.useTypeScript, projectInfo.projectAuthor, projectInfo.projectDescription);
                 break;
             case 'Next':
-                await createNextProject(projectDirectory, projectInfo.useTypeScript);
+                await createNextProject(projectDirectory, projectInfo.useTypeScript, projectInfo.projectAuthor, projectInfo.projectDescription);
                 break;
             default:
                 throw new Error(`Unknown project type: ${projectInfo.projectType}`);
