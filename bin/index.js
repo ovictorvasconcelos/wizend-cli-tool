@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 import arg from "arg";
+import logger from "../src/logger.js";
 import startCommand from "../src/commands/start.js";
+import createCommand from "../src/commands/create.js";
 import getUserConfig from "../src/config/config-mgr.js";
+
+const logMessage = logger('config:mgr');
 
 try {
     const args = arg({
@@ -9,20 +13,25 @@ try {
         '--create': Boolean,
     });
 
+    logMessage.debug('Received args', args);
+
     if (args['--start']) {
         const userConfig = getUserConfig();
         startCommand(userConfig);
     }
 
+    if (args['--create'])
+        createCommand();
+
 } catch (error) {
-    console.log(error.message);
-    console.log(' ');
+    logMessage.error(error.message);
+    logMessage.log(' ');
 
     usageTool();
 }
 
 function usageTool() {
-    console.log(`Wizend [CMD]
-    --start\tStarts the app
-    --create\tStarts the app`);
+    logMessage.log(`Wizend [CMD]
+    --create\tCreate a project
+    --start\tStarts the project`);
 }
