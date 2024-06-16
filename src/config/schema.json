@@ -16,7 +16,6 @@
         },
         "repository": {
             "type": "string",
-            "format": "uri",
             "default": ""
         },
         "author": {
