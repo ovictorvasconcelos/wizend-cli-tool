@@ -20,6 +20,7 @@ export async function createCommand() {
                 name: 'projectName',
                 message: 'Project Name',
                 validate: (input) => !!input.trim() || "Project name cannot be empty",
+                default: 'project-name',
             },
             {
                 type: 'input',
