@@ -41,14 +41,6 @@ To install Wizend, follow these steps:
 
 Once installed, you can use Wizend via the command line:
 
-### Available Commands
-
-#### Create a Project
-
-```sh
-wizend --create
-```
-
 ## Example Usage
 To create a new project, run:
 
@@ -65,10 +57,6 @@ You will be prompted to provide the project name, project type (Node, React, or 
     /src
         /commands
             create.js
-            start.js
-        /config
-            config-mgr.js
-            schema.json
         /logger.js
         /templates
             nodeProject.js
