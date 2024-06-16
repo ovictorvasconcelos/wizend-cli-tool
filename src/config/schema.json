@@ -2,7 +2,27 @@
     "type": "object",
     "properties": {
         "port": {
-            "type": "number"
+            "type": "number",
+            "default": 8080
+        },
+        "projectType": {
+            "type": "string",
+            "enum": ["node", "react", "next"],
+            "default": "node"
+        },
+        "useTypescript": {
+            "type": "boolean",
+            "default": false
+        },
+        "repository": {
+            "type": "string",
+            "format": "uri",
+            "default": ""
+        },
+        "author": {
+            "type": "string",
+            "default": "Unknow"
         }
-    }
+    },
+    "required": ["port", "projectType", "useTypescript"]
 }
