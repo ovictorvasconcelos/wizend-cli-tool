@@ -5,7 +5,7 @@ import { promisify } from "util";
 const makeDirAsync = promisify(fs.mkdir);
 const writeAsyncFile = promisify(fs.writeFile);
 
-export async function createReactProject(projectDirectory, useTypeScript) {
+export async function createReactProject(projectDirectory, useTypeScript, projectAuthor, projectDescription) {
     const packageContent = {
         name: path.basename(projectDirectory),
         version: "1.0.0",
@@ -14,7 +14,9 @@ export async function createReactProject(projectDirectory, useTypeScript) {
             build: "react-scripts build",
             test: "react-scripts test",
             eject: "react-scripts eject"
-        }
+        },
+        author: projectAuthor,
+        description: projectDescription
     };
 
     await writeAsyncFile(

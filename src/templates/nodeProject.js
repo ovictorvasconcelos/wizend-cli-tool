@@ -4,14 +4,16 @@ import { promisify } from "util";
 
 const writeAsyncFile = promisify(fs.writeFile);
 
-export async function createNodeProject(projectDirectory, useTypeScript) {
+export async function createNodeProject(projectDirectory, useTypeScript, projectAuthor, projectDescription) {
     const packageContent = {
         name: path.basename(projectDirectory),
         version: "1.0.0",
         main: "index.js",
         scripts: {
             start: useTypeScript ? "ts-node index.ts" : "node index.js"
-        }
+        },
+        author: projectAuthor,
+        description: projectDescription
     };
 
     const mainFileContent = useTypeScript
