@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 import arg from "arg";
+import startCommand from "../src/commands/start.js";
 import getUserConfig from "../src/config/config-mgr.js";
 
 try {
     const args = arg({
+        '--start': Boolean,
         '--create': Boolean,
-        '--config': Boolean,
     });
 
-    if (args['--config']) {
+    if (args['--start']) {
         const userConfig = getUserConfig();
-        console.log(userConfig);
+        startCommand(userConfig);
     }
 
 } catch (error) {
@@ -22,6 +23,6 @@ try {
 
 function usageTool() {
     console.log(`Wizend [CMD]
-    --create\tStarts the app
-    --config\tSee app config`);
+    --start\tStarts the app
+    --create\tStarts the app`);
 }
