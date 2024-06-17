@@ -58,19 +58,32 @@ wizend --delete
 
 You will be prompted to provide the project name and confirm that you really want to delete the project.
 
+### To list local git repositories, run:
+
+```sh
+wizend --list-repos
+```
+
+You'll get a list of all the local git repositories
+
 ## Project Structure
 
 ```
 /wizend-cli-tool
+    /bin
+        index.js
     /src
         /commands
             create.js
+            delete.js
+            listRepositories.js
         /logger.js
         /templates
             nodeProject.js
             reactProject.js
             nextProject.js
-    index.js
+    .gitignore
+    LICENSE.md
     package.json
     README.md
 ```
