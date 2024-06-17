@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { promisify } from "util";
 import logger from "../logger.js";
 import { exec } from "child_process";
@@ -11,6 +13,14 @@ const isValidGithubUrl = (url) => {
     return githubUrlRegex.test(url);
 }
 
+const createGitIgnoreFile = async (projectDirectory) => {
+    const writeAsyncFile = promisify(fs.writeFile);
+
+    const gitIgnoreFile = `node_modules/\nnpm-debug.log\n`;
+
+    await writeAsyncFile(path.join(projectDirectory, '.gitignore'), gitIgnoreFile);
+}
+
 export async function linkGitRepository(projectDirectory, repositoryUrl) {
     if (!repositoryUrl) {
         logMessage.error('Repository URL not provided. Skipping linking to Git.');
@@ -20,6 +30,8 @@ export async function linkGitRepository(projectDirectory, repositoryUrl) {
     } else {
         await execAsync('git init', { cwd: projectDirectory });
         await execAsync(`git remote add origin ${repositoryUrl}`, { cwd: projectDirectory });
+
+        await createGitIgnoreFile(projectDirectory);
     
         logMessage.highlight(`Linked project to Git repository: ${repositoryUrl}`);
     }
