@@ -53,16 +53,18 @@ You will be prompted to provide the project name, project type (Node, React, or 
 ### To delete a project, run:
 
 ```sh
-cli-tool-wizend --link
+cli-tool-wizend --delete
 ```
 
-You will be prompted to provide the project name and github repository url.
+You will be prompted to provide the project name and confirm that you really want to delete the project.
 
 ### To link to a repository on Github, run
 
 ```sh
-cli-tool-wizend --delete
+cli-tool-wizend --link
 ```
+
+You will be prompted to provide the project name and github repository url.
 
 ### To list local git repositories, run:
 
