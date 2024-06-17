@@ -4,6 +4,7 @@ import inquirer from "inquirer";
 import { promisify } from "util";
 import logger from "../logger.js";
 import { exec } from "child_process";
+import { runNpmInstall } from "../utils/npmUtils.js";
 import { createNextProject } from "../templates/nextProject.js";
 import { createNodeProject } from "../templates/nodeProject.js";
 import { createReactProject } from "../templates/reactProject.js";
@@ -23,18 +24,6 @@ async function linkGitRepository(projectDirectory, repositoryUrl) {
     await execAsync(`git remote add origin ${repositoryUrl}`, { cwd: projectDirectory });
 
     logMessage.highlight(`Linked project to Git repository: ${repositoryUrl}`);
-}
- 
-async function runNpmInstall(directory) {
-    try {
-        logMessage.log(' ');
-        logMessage.log('Running npm install...');
-        await execAsync('npm install', { cwd: directory });
-        logMessage.log(' ');
-        logMessage.highlight('Dependencies successfully installed!');
-    } catch (error) {
-        logMessage.error(`Error executing the 'npm install' command: `, error);
-    }
 }
 
 export async function createCommand() {
