@@ -31,6 +31,7 @@ try {
         listRepositoriesCommand();
 
 } catch (error) {
+    logMessage.log(' ');
     logMessage.error(error.message);
     logMessage.log(' ');
 
@@ -43,4 +44,5 @@ function usageTool() {
     --delete\t\tDelete a project
     --link\t\tLink to a Git repository
     --list-repos\tList local Git repositories`);
+    logMessage.log(' ');
 }
