@@ -1,8 +1,8 @@
 # Wizend CLI Tool
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/your-username/wizend/releases)
-[![Build Status](https://travis-ci.org/your-username/wizend.svg?branch=main)](https://travis-ci.org/your-username/wizend)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/ovictorvasconcelos/wizend-cli-tool/releases)
+[![Build Status](https://travis-ci.org/ovictorvasconcelos/wizend-cli-tool.svg?branch=main)](https://travis-ci.org/ovictorvasconcelos/wizend-cli-tool)
 
 Wizend is a command-line interface (CLI) tool designed to manage projects quickly and efficiently. With Wizend, you can create Node, React and Next projects.
 
@@ -42,13 +42,21 @@ To install Wizend, follow these steps:
 Once installed, you can use Wizend via the command line:
 
 ## Example Usage
-To create a new project, run:
+### To create a new project, run:
 
 ```sh
 wizend --create
 ```
 
-You will be prompted to provide the project name, project type (Node, React, or Next), and whether to use TypeScript.
+You will be prompted to provide the project name, project type (Node, React, or Next), author name, and whether to use TypeScript.
+
+### To delete a project, run:
+
+```sh
+wizend --delete
+```
+
+You will be prompted to provide the project name and confirm that you really want to delete the project.
 
 ## Project Structure
 
