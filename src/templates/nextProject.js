@@ -20,7 +20,7 @@ export async function createNextProject(projectDirectory, useTypeScript, project
         dependencies: {
             "react": "^18.2.0",
             "react-dom": "^18.2.0",
-            "next": "^13.0.0"
+            "next": "^14.1.1"
         },
         devDependencies: {
             ...(useTypeScript && {
