@@ -45,7 +45,7 @@ Once installed, you can use Wizend via the command line:
 ### To create a new project, run:
 
 ```sh
-wizend --create
+cli-tool-wizend --create
 ```
 
 You will be prompted to provide the project name, project type (Node, React, or Next), author name, and whether to use TypeScript.
@@ -53,15 +53,21 @@ You will be prompted to provide the project name, project type (Node, React, or 
 ### To delete a project, run:
 
 ```sh
-wizend --delete
+cli-tool-wizend --link
 ```
 
-You will be prompted to provide the project name and confirm that you really want to delete the project.
+You will be prompted to provide the project name and github repository url.
+
+### To link to a repository on Github, run
+
+```sh
+cli-tool-wizend --delete
+```
 
 ### To list local git repositories, run:
 
 ```sh
-wizend --list-repos
+cli-tool-wizend --list-repos
 ```
 
 You'll get a list of all the local git repositories
@@ -82,6 +88,9 @@ You'll get a list of all the local git repositories
             nodeProject.js
             reactProject.js
             nextProject.js
+        /utils
+            gitUtils.js
+            npmUtils.js
     .gitignore
     LICENSE.md
     package.json
