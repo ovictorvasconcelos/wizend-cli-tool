@@ -3,13 +3,27 @@ import path from "path";
 import inquirer from "inquirer";
 import { promisify } from "util";
 import logger from "../logger.js";
+import { exec } from "child_process";
 import { createNextProject } from "../templates/nextProject.js";
 import { createNodeProject } from "../templates/nodeProject.js";
 import { createReactProject } from "../templates/reactProject.js";
 
+const execAsync = promisify(exec);
 const logMessage = logger('config:mgr');
 const makeDirAsync = promisify(fs.mkdir);
 const writeAsyncFile = promisify(fs.writeFile);
+
+async function runNpmInstall(directory) {
+    try {
+        logMessage.log(' ');
+        logMessage.log('Running npm install...');
+        await execAsync('npm install', { cwd: directory });
+        logMessage.log(' ');
+        logMessage.highlight('Dependencies successfully installed!');
+    } catch (error) {
+        logMessage.error(`Error executing the 'npm install' command: `, error);
+    }
+}
 
 export async function createCommand() {
     try {
@@ -73,6 +87,8 @@ export async function createCommand() {
             default:
                 throw new Error(`Unknown project type: ${projectInfo.projectType}`);
         }
+
+        await runNpmInstall(projectDirectory);
 
     } catch (error) {
         logMessage.error('Failed to create project: ', error);
