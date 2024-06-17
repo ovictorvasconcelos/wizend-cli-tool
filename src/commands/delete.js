@@ -1,31 +1,10 @@
 import fs from "fs";
 import path from "path";
 import inquirer from "inquirer";
-import { promisify } from "util";
 import logger from "../logger.js";
+import fsExtra from "fs-extra/esm";
 
-const rmDirAsync = promisify(fs.rmdir);
 const logMessage = logger('config:mgr');
-const unlinkAsync = promisify(fs.unlink);
-const readDirAsync = promisify(fs.readdir);
-
-async function deleteFolderRecursive(directory) {
-    if (fs.existsSync(directory)) {
-        const files = await readDirAsync(directory);
-
-        for (const file of files) {
-            const currentPath = path.join(directory, file);
-
-            if (fs.lstatSync(currentPath).isDirectory()) {
-                await deleteFolderRecursive();
-            } else {
-                await unlinkAsync(currentPath);
-            }
-        }
-
-        await rmDirAsync(directory);
-    }
-}
 
 export async function deleteCommand() {
     try {
@@ -45,7 +24,7 @@ export async function deleteCommand() {
             return;
         }
 
-        await deleteFolderRecursive(projectDirectory);
+        await fsExtra.remove(projectDirectory);
 
         logMessage.highlight(`Project '${projectInfo.projectName}' deleted successfully from '${projectDirectory}'`);
 
