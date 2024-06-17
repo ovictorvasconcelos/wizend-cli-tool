@@ -13,6 +13,18 @@ const logMessage = logger('config:mgr');
 const makeDirAsync = promisify(fs.mkdir);
 const writeAsyncFile = promisify(fs.writeFile);
 
+async function linkGitRepository(projectDirectory, repositoryUrl) {
+    if (!repositoryUrl) {
+        logMessage.error('Repository URL not provided. Skipping linking to Git.');
+        return;
+    }
+
+    await execAsync('git init', { cwd: projectDirectory });
+    await execAsync(`git remote add origin ${repositoryUrl}`, { cwd: projectDirectory });
+
+    logMessage.highlight(`Linked project to Git repository: ${repositoryUrl}`);
+}
+ 
 async function runNpmInstall(directory) {
     try {
         logMessage.log(' ');
@@ -60,10 +72,14 @@ export async function createCommand() {
                 message: 'Author',
                 default: "Unknow Auhtor"
             },
+            {
+                type: 'input',
+                name: 'repositoryUrl',
+                message: 'Git Repository URL (Optional)'
+            }
         ]);
         
         const projectDirectory = path.join(process.cwd(), projectInfo.projectName);
-
         await makeDirAsync(projectDirectory);
 
         const readmeContent = `# ${projectInfo.projectName}\n\n${projectInfo.projectDescription || ''}\n\nDeveloped by ${projectInfo.projectAuthor}\n\nProject Type: ${projectInfo.projectType}\nUse TypeScript: ${projectInfo.useTypeScript}`;
@@ -89,6 +105,7 @@ export async function createCommand() {
         }
 
         await runNpmInstall(projectDirectory);
+        await linkGitRepository(projectDirectory, projectInfo.repositoryUrl);
 
     } catch (error) {
         logMessage.error('Failed to create project: ', error);
