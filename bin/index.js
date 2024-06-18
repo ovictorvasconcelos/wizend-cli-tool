@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import arg from "arg";
 import logger from "../src/logger.js";
+import helpCommand from "../src/commands/help.js";
 import { createCommand } from "../src/commands/create.js";
 import { deleteCommand } from "../src/commands/delete.js";
 import { linkCommand } from "../src/commands/linkRepository.js";
@@ -13,7 +14,8 @@ try {
         '--create': Boolean,
         '--delete': Boolean,
         '--link': Boolean,
-        '--list-repos': Boolean
+        '--list-repos': Boolean,
+        '--help': Boolean
     });
 
     logMessage.debug('Received args', args);
@@ -29,6 +31,9 @@ try {
 
     if (args['--list-repos'])
         listRepositoriesCommand();
+
+    if (args['--help'])
+        helpCommand();
 
 } catch (error) {
     logMessage.log(' ');
