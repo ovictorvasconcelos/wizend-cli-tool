@@ -74,6 +74,13 @@ cli-tool-wizend --list-repos
 
 You'll get a list of all the local git repositories
 
+### To get help, run:
+
+```sh
+cli-tool-wizend --help or -h
+```
+You'll get a list of all the tool's commands
+
 ## Project Structure
 
 ```
@@ -84,6 +91,8 @@ You'll get a list of all the local git repositories
         /commands
             create.js
             delete.js
+            help.js
+            linkRepository.js
             listRepositories.js
         /logger.js
         /templates
