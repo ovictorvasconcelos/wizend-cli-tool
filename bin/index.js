@@ -15,7 +15,8 @@ try {
         '--delete': Boolean,
         '--link': Boolean,
         '--list-repos': Boolean,
-        '--help': Boolean
+        '--help': Boolean,
+        '--h': Boolean,
     });
 
     logMessage.debug('Received args', args);
@@ -32,7 +33,7 @@ try {
     if (args['--list-repos'])
         listRepositoriesCommand();
 
-    if (args['--help'])
+    if (args['--help'] || args['--h'])
         helpCommand();
 
 } catch (error) {
