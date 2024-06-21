@@ -1,8 +1,8 @@
 import path from "path";
 import { promisify } from "util";
-import { readFileSync } from "fs";
 import logger from "../logger.js";
 import { exec } from 'child_process';
+import { readFileSync, writeFileSync } from "fs";
 
 const execAsync = promisify(exec);
 const logMessage = logger('config:mgr');
@@ -21,4 +21,9 @@ export function readPackageJson(projectDirectory) {
     const packageContent = JSON.parse(readFileSync(packagePath, 'utf-8'));
 
     return packageContent;
+}
+
+export function writePackageJson(projectDirectory, packageContent) {
+    const packagePath = path.join(projectDirectory, 'package.json');
+    writeFileSync(packagePath, JSON.stringify(packageContent, null, 2));
 }
