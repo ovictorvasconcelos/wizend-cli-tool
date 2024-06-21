@@ -11,6 +11,9 @@ export async function updateCommand(projectDirectory) {
         const packageContent = readPackageJson(projectDirectory);
         const dependenciesUpdate = [];
 
+        logMessage.log(' ');
+        logMessage.highlight('Checking for dependency updates...');
+
         for (const dependencies in packageContent.dependencies) {
             const currentVersion = packageContent.dependencies[dependencies];
             const latestVersion = await getLatestVersion(dependencies);
@@ -31,13 +34,19 @@ export async function updateCommand(projectDirectory) {
             }
         }
 
-        writePackageJson(projectDirectory, packageContent);
+        if (dependenciesUpdate.length > 0) {
+            logMessage.log(' ');
+            logMessage.log('Updating dependencies...');
+            writePackageJson(projectDirectory, packageContent);
 
-        if (dependenciesUpdate.length > 0)
+            logMessage.highlight('Running npm install to apply updates...');
             await execAsync(`cd ${projectDirectory} && npm install`);
 
-        logMessage.log(' ');
-        logMessage.highlight('Dependencies updated successfully!');
+            logMessage.log(' ');
+            logMessage.highlight('Dependencies updated successfully!');
+        } else {
+            logMessage.log('All dependencies are already up to date.');
+        }
     } catch (error) {
         logMessage.error('Failed to update dependencies: ', error);
     }
