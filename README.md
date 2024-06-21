@@ -12,6 +12,7 @@ Wizend is a command-line interface (CLI) tool designed to manage projects quickl
 - Delete an existing project.
 - Link a project to a GitHub repository.
 - View local Git repositories.
+- Update project dependencies
 
 ## Installation
 
@@ -74,6 +75,14 @@ cli-tool-wizend --list-repos
 
 You'll get a list of all the local git repositories
 
+### To update project dependencies, run:
+
+```sh
+cli-tool-wizend --update-dep <dir>
+```
+
+Update project dependencies in the specified directory.
+
 ### To get help, run:
 
 ```sh
@@ -94,6 +103,7 @@ You'll get a list of all the tool's commands
             help.js
             linkRepository.js
             listRepositories.js
+            updateDependencies.js
         /logger.js
         /templates
             nodeProject.js
@@ -102,6 +112,7 @@ You'll get a list of all the tool's commands
         /utils
             gitUtils.js
             npmUtils.js
+            packageUtils.js
     .gitignore
     LICENSE.md
     package.json
