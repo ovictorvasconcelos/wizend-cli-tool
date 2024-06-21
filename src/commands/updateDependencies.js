@@ -1,15 +1,26 @@
 import path from "path";
+import { promisify } from "util";
 import logger from "../logger.js";
-import { readFileSync } from "fs";
+import { exec } from "child_process";
+import { getLatestVersion, readPackageJson } from "../utils/packageUtils.js";
 
+const execAsync = promisify(exec);
 const logMessage = logger('config:mgr');
 
 export async function updateCommand(projectDirectory) {
     try {
-        const packagePath = path.join(projectDirectory, 'package.json');
-        const packageContent = JSON.parse(readFileSync(packagePath, 'utf-8'));
-
+        const packageContent = readPackageJson(projectDirectory);
         const dependenciesUpdate = [];
+
+        for (const dependencies in packageContent.dependencies) {
+            const currentVersion = packageContent.dependencies[dependencies];
+            const latestVersion = await getLatestVersion(dependencies);
+
+            if (latestVersion && latestVersion !== currentVersion) {
+                packageContent.dependencies[dependencies] = latestVersion;
+                dependenciesUpdate.push(`${dependencies}@${latestVersion}`);
+            }
+        }
     } catch (error) {
         logMessage.error('Failed to update dependencies: ', error);
     }
