@@ -1,4 +1,6 @@
+import path from "path";
 import { promisify } from "util";
+import { readFileSync } from "fs";
 import logger from "../logger.js";
 import { exec } from 'child_process';
 
@@ -12,4 +14,11 @@ export async function getLatestVersion(packageName) {
     } catch (error) {
         logMessage.error(`Failed to get latest version for ${packageName}:`, error);
     }
+}
+
+export function readPackageJson(projectDirectory) {
+    const packagePath = path.join(projectDirectory, 'package.json');
+    const packageContent = JSON.parse(readFileSync(packagePath, 'utf-8'));
+
+    return packageContent;
 }
